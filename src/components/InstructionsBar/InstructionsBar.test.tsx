@@ -17,7 +17,7 @@ describe('InstructionsBar', () => {
   it('should call the onClick prop when the button is clicked', () => {
     const { onClick } = defaultProps;
     const { getByText } = render(<InstructionsBar onClick={onClick} />);
-      fireEvent.click(getByText(buttonText));
-      expect(onClick).toHaveBeenCalled();
+    fireEvent.click(getByText(buttonText));
+    expect(onClick).toHaveBeenCalled();
   });
 });
