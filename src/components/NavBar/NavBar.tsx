@@ -1,5 +1,6 @@
 import { Link, Box } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import NavBarLink from '../NavBarLink';
 type TNavBar = {
   links: {
     text: string;
@@ -30,22 +31,7 @@ function NavBar({ links }: TNavBar) {
       </Link>
 
       {links.map(({ text, href, 'data-testid': dataTestId }) => (
-        <Link
-          component={RouterLink}
-          key={href}
-          to={href}
-          color="#fff"
-          underline="hover"
-          sx={{
-            cursor: 'pointer',
-            '&:not(:last-of-type)': {
-              marginBottom: '16px',
-            },
-          }}
-          data-testid={dataTestId}
-        >
-          {text}
-        </Link>
+        <NavBarLink key={href} text={text} dataTestId={dataTestId} href={href} />
       ))}
     </Box>
   );
