@@ -1,6 +1,6 @@
 import InstructionsBar from './InstructionsBar';
 import { renderWithProviders } from '../../utils/test';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent } from '@testing-library/react';
 
 describe('InstructionsBar', () => {
   const defaultProps = {
@@ -16,7 +16,9 @@ describe('InstructionsBar', () => {
   // TODO: Challenge 3
   it('should call the onClick prop when the button is clicked', () => {
     const { onClick } = defaultProps;
-    const { getByText } = render(<InstructionsBar onClick={onClick} />);
+    const { getByText } = renderWithProviders(
+      <InstructionsBar onClick={onClick} />
+    );
     fireEvent.click(getByText(buttonText));
     expect(onClick).toHaveBeenCalled();
   });
