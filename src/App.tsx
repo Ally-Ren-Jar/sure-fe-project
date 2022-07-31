@@ -7,6 +7,7 @@ import Layout from './components/Layout';
 import { useState } from 'react';
 import Modal from './components/Modal';
 import Instructions from './components/Instructions';
+import PolicyholdersView from './components/PolicyholdersView';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<HomeView />} />
           <Route path="/table" element={<TableDemoView />} />
           <Route path="/you-can-do-it" element={<YouCanDoItView />} />
+          <Route path="/policyholders" element={<PolicyholdersView />} />
           <Route path="*" element={<RedirectView />} />
         </Routes>
       </Layout>
