@@ -1,13 +1,17 @@
+import { Button, Box, Alert } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useFetch from 'use-http';
 import { apiUrl } from '../../constants/api';
 import { TPolicyholder, TAddress } from '../../types';
 import InfoTable from '../InfoTable';
 import InfoTableSkeleton from '../InfoTableSkeleton';
+import { policyholder as policyholderMockData } from './mockData';
 
 type TPolicyholderRowData = {
   [key in PolicyholderRowKeys]: string;
 };
+
+type TResponseData = { policyHolders: TPolicyholder[] };
 
 enum PolicyholderRowKeys {
   name = 'Name',
@@ -32,12 +36,11 @@ function PolicyholdersView() {
   const [policyholders, setPolicyholders] = useState<TPolicyholderRowData[]>(
     []
   );
-  const { get, response, loading } = useFetch(apiUrl);
+  const { get, response, loading, post, error } = useFetch(apiUrl);
 
   const fetchPolicyholders = async () => {
-    const responseData: { policyHolders: TPolicyholder[] } = await get(
-      '/api/policyholders'
-    );
+    const responseData: TResponseData = await get('/api/policyholders');
+
     if (response.ok)
       setPolicyholders(normalizeData(responseData?.policyHolders ?? []));
   };
@@ -69,8 +72,19 @@ function PolicyholdersView() {
     return normalizedData;
   };
 
+  const onAddPolicyholderClick = async () => {
+    const responseData: TResponseData = await post(
+      '/api/policyholders',
+      policyholderMockData
+    );
+
+    if (response.ok) {
+      setPolicyholders(normalizeData(responseData?.policyHolders ?? []));
+    }
+  };
+
   return (
-    <>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, mb: 2 }}>
       {loading ? (
         <InfoTableSkeleton header="Policyholders" />
       ) : (
@@ -82,7 +96,21 @@ function PolicyholdersView() {
           />
         ))
       )}
-    </>
+      {error && (
+        <Alert severity="error">
+          There was an issue processing your request.
+        </Alert>
+      )}
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Button
+          disabled={policyholders.length > 1}
+          onClick={onAddPolicyholderClick}
+          size="large"
+        >
+          Add a policyholder
+        </Button>
+      </Box>
+    </Box>
   );
 }
 
