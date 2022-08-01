@@ -2,24 +2,16 @@ import { Button, Box, Alert } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useFetch from 'use-http';
 import { apiUrl } from '../../constants/api';
-import { TPolicyholder, TAddress } from '../../types';
+import {
+  TPolicyholder,
+  TAddress,
+  TPolicyholderRowData,
+  TResponseData,
+  PolicyholderRowKeys,
+} from './PolicyholdersView.types';
 import InfoTable from '../InfoTable';
 import InfoTableSkeleton from '../InfoTableSkeleton';
-import { policyholder as policyholderMockData } from './mockData';
-
-type TPolicyholderRowData = {
-  [key in PolicyholderRowKeys]: string;
-};
-
-type TResponseData = { policyHolders: TPolicyholder[] };
-
-enum PolicyholderRowKeys {
-  name = 'Name',
-  age = 'Age',
-  address = 'Address',
-  phoneNumber = 'Phone number',
-  isPrimary = 'Primary policyholder?',
-}
+import { policyholder as policyholderMockData } from './PolicyholdersView.constants';
 
 const getRows = (
   policyholder: TPolicyholderRowData
