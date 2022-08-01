@@ -109,3 +109,17 @@ function PolicyholdersView() {
 }
 
 export default PolicyholdersView;
+
+// These comments are based on the acceptance criteria, not full CRUD functionality :)
+
+// Add no content message if there are no policyholders
+
+// Improve isActive nav link styling
+
+// Add tests for remaining components
+
+// Add more detailed error messaging (and add BE type validation for post request)
+
+// Although this is considered desktop only, I would add some 
+// additional styling to the leftbar so the width stays consistent
+// for each page when viewing on a narrow window
