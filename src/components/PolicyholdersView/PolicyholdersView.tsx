@@ -28,7 +28,9 @@ function PolicyholdersView() {
   const [policyholders, setPolicyholders] = useState<TPolicyholderRowData[]>(
     []
   );
-  const { get, response, loading, post, error } = useFetch(apiUrl);
+  const { get, response, loading, post, error } = useFetch(apiUrl, {
+    loading: true,
+  });
 
   const fetchPolicyholders = async () => {
     const responseData: TResponseData = await get('/api/policyholders');
